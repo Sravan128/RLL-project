@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.telecom")
-@EntityScan(basePackages = "com.telecom")
-@EnableJpaRepositories(basePackages = "com.telecom.engineer.repository")
+@EntityScan(basePackages = "com.telecom.bean")
+@EnableJpaRepositories(basePackages = "com.telecom.repository")
 public class ComplaintRedressalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ComplaintRedressalApplication.class, args);
-		System.out.println("Server started at port number 9090");
+		System.out.println("Server up on prt 9090");
 	}
 
 }

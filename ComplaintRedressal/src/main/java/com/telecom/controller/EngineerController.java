@@ -1,6 +1,7 @@
-package com.telecom.engineer.controller;
+package com.telecom.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,32 +12,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.telecom.engineer.bean.Complaint;
-import com.telecom.engineer.service.EngineerService;
+import com.telecom.bean.Complaint;
+import com.telecom.service.EngineerService;
 
 @RestController
 @RequestMapping(value="engineer")
 public class EngineerController {
+
 	
 	@Autowired
-	EngineerService  engineerservice;
-	
+	EngineerService  engineerService;
 	
 	@GetMapping(value="assignedTickets/{eid}", produces = MediaType.APPLICATION_JSON_VALUE )
-	public List<Integer> assignedTickets(@PathVariable("eid") int eid) {
-		return engineerservice.assignedTickets(eid);
+	public List<Complaint> assignedTickets(@PathVariable("eid") int eid) {
+		return engineerService.assignedTickets(eid);
 	}
-
 	
 	@PatchMapping(value="updateStatus", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String  updateStatus(@RequestBody  Complaint complaint) {
-		return engineerservice.updateStatus(complaint);
+		return engineerService.updateStatus(complaint);
 	}
 	
-	@GetMapping(value="viewStatus/{tid}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String viewTicket(@PathVariable("tid") int tid) {
-		return engineerservice.ViewTicket(tid);
+	@GetMapping(value="viewTicket/{tid}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Complaint viewTicket(@PathVariable("tid") int tid) {
+		return engineerService.ViewTicket(tid);
+		
 	}
 	
+	@GetMapping(value="viewFeedback/{eid}", produces = MediaType.APPLICATION_JSON_VALUE )
+	public List<Complaint> viewFeedbackTickets(@PathVariable("eid") int eid) {
+		return engineerService.viewFeedbackTickets(eid);
+	}
 	
 }
